@@ -3,7 +3,7 @@
 	email = ${EMAIL}
 
 [help]
-	format = html
+	format = man
 
 [push]
 	default = simple
