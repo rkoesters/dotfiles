@@ -4,13 +4,16 @@ set encoding=utf8
 " General settings.
 set autoindent
 set background=dark
-set colorcolumn=+1
 set formatoptions=tcqrn
 set noexpandtab
 set nowrap
 set scrolloff=2
 set spell
 set title
+
+if exists("+colorcolumn")
+	set colorcolumn=+1
+endif
 
 " These options use environmental variables.
 let &tabstop=$tabstop
