@@ -1,0 +1,7 @@
+[user]
+	name = Ryan Koesters
+	email = rmkoesters@gmail.com
+[help]
+	format = html
+[push]
+	default = simple

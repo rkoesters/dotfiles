@@ -1,0 +1,10 @@
+#!/bin/sh
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# Source shell scripts in 'shrc.d/'.
+for i in `dirname $ENV`/shrc.d/*.sh
+do
+	. $i
+done
+unset i

@@ -1,0 +1,110 @@
+#!/bin/sh
+set -e
+
+usage () {
+	echo "Usage: $0 [OPTIONS]"
+	echo
+	echo "Options:"
+	echo "  -c, --check    Check that all source files exist. Implies -n."
+	echo "  -n, --noexec   Do not execute commands."
+	echo "  -v, --verbose  Print each command as they are executed."
+	echo "  -h, --help     Display help message and exit."
+}
+
+# Output arguments as semicolon separated list.
+join () {
+	string="$1"
+	shift
+	for i in "$@"; do
+		string="$string:$i"
+	done
+	echo "$string"
+}
+
+# Run the given command.
+cmd () {
+	if [ "$verbose" = "1" ]; then
+		echo "$@"
+	fi
+
+	if [ "$noexec" != "1" ]; then
+		"$@"
+	fi
+}
+
+
+# Parse arguments.
+while [ $# -gt 0 ]; do
+	case $1 in
+		-c|--check)
+			check=1
+			;;
+		-n|--noexec)
+			noexec=1
+			;;
+		-v|--verbose)
+			verbose=1
+			;;
+		-h|--help)
+			usage >&2
+			exit 0
+			;;
+		*)
+			echo "unknown option: $1" >&2
+			usage >&2
+			exit 1
+			;;
+	esac
+	shift
+done
+
+# Create list of directories that will be created.
+dirs=`join \
+	config \
+	config/git \
+	config/sh \
+	config/sh/shrc.d \
+	vim \
+	vim/backup \
+	vim/tmp \
+`
+
+# Create list of files that will be installed.
+files=`join \
+	config/git/config \
+	config/sh/shrc \
+	config/sh/shrc.d/alias.sh \
+	config/sh/shrc.d/defaults.sh \
+	config/sh/shrc.d/functions.sh \
+	config/sh/shrc.d/prompt.sh \
+	config/sh/shrc.d/prompt_command.sh \
+	config/sh/shrc.d/title.sh \
+	config/sh/shrc.d/vars.sh \
+	profile \
+	vimrc \
+`
+
+# Check if all source files exist.
+if [ "$check" = "1" ]; then
+	status=0
+	IFS=':'
+	for i in $files; do
+		if [ ! -f "$i" ]; then
+			echo "missing file: $i" >&2
+			status=1
+		fi
+	done
+	exit $status
+fi
+
+# Create directories.
+IFS=':'
+for i in $dirs; do
+	cmd mkdir "$HOME/.$i"
+done
+
+# Install files.
+IFS=':'
+for i in $files; do
+	cmd cp "$i" "$HOME/.$i"
+done
