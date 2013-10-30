@@ -3,7 +3,7 @@ set -e
 
 # List of files that should not be installed.
 exclude='
-.git
+.git*
 README
 INSTALL*
 *.in
