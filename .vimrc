@@ -4,7 +4,7 @@ set encoding=utf8
 " General settings.
 set autoindent
 set background=dark
-set formatoptions=tcqrnj
+set formatoptions=tcqrn
 set noexpandtab
 set nowrap
 set scrolloff=2
