@@ -4,6 +4,7 @@ set encoding=utf8
 " General settings.
 set autoindent
 set background=dark
+set colorcolumn=+1
 set formatoptions=tcqrn
 set noexpandtab
 set nowrap
@@ -12,7 +13,6 @@ set spell
 set title
 
 " These options use environmental variables.
-let &colorcolumn=$textwidth+1
 let &tabstop=$tabstop
 let &textwidth=$textwidth
 
