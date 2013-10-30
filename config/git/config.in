@@ -1,7 +1,9 @@
 [user]
-	name = Ryan Koesters
-	email = rmkoesters@gmail.com
+	name = ${FULLNAME}
+	email = ${EMAIL}
+
 [help]
 	format = html
+
 [push]
 	default = simple

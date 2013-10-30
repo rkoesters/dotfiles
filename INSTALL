@@ -1,49 +1,74 @@
 #!/bin/sh
 set -e
 
+# List of files that should not be installed.
+exclude='
+.git
+README
+INSTALL*
+*.in
+'
+
 usage () {
 	echo "Usage: $0 [OPTIONS]"
 	echo
 	echo "Options:"
-	echo "  -c, --check    Check that all source files exist. Implies -n."
-	echo "  -n, --noexec   Do not execute commands."
+	echo "  -n, --dry-run  Do not execute commands."
 	echo "  -v, --verbose  Print each command as they are executed."
 	echo "  -h, --help     Display help message and exit."
 }
 
-# Output arguments as semicolon separated list.
-join () {
-	string="$1"
-	shift
-	for i in "$@"; do
-		string="$string:$i"
-	done
-	echo "$string"
+get_full_username () {
+	getent passwd $USER |
+	cut -d ':' -f 5 |
+	cut -d ',' -f 1
 }
 
-# Run the given command.
-cmd () {
-	if [ "$verbose" = "1" ]; then
-		echo "$@"
+ask_questions() {
+	FULLNAME=${FULLNAME:-`get_full_username`}
+	printf 'Full name [%s]: ' "$FULLNAME"
+	read input
+	if [ "$input" != "" ]; then
+		FULLNAME="$input"
 	fi
 
-	if [ "$noexec" != "1" ]; then
-		"$@"
+	EMAIL=${EMAIL:-"$USER@localhost"}
+	printf 'Email address [%s]: ' "$EMAIL"
+	read input
+	if [ "$input" != "" ]; then
+		EMAIL="$input"
 	fi
+
+	unset input
+	export EMAIL FULLNAME
+
+	# Build cache.
+	env |
+	grep -e EMAIL -e FULLNAME |
+	sed -e 's/=/=\"/g' -e 's/$/\"/g' >./INSTALL.cache
 }
 
+# Expands environmental variables in file.
+process_file () {
+	env |
+	sed 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' |
+	sed -f /dev/stdin $1
+}
+
+install_dotfiles () {
+	echo "$exclude" |
+	rsync -a $rsync_args --exclude-from /dev/stdin . $HOME
+}
 
 # Parse arguments.
+rsync_args=
 while [ $# -gt 0 ]; do
 	case $1 in
-		-c|--check)
-			check=1
-			;;
-		-n|--noexec)
-			noexec=1
+		-n|--dry-run)
+			rsync_args="$rsync_args -n"
 			;;
 		-v|--verbose)
-			verbose=1
+			rsync_args="$rsync_args -v"
 			;;
 		-h|--help)
 			usage >&2
@@ -58,53 +83,19 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
-# Create list of directories that will be created.
-dirs=`join \
-	config \
-	config/git \
-	config/sh \
-	config/sh/shrc.d \
-	vim \
-	vim/backup \
-	vim/tmp \
-`
-
-# Create list of files that will be installed.
-files=`join \
-	config/git/config \
-	config/sh/shrc \
-	config/sh/shrc.d/alias.sh \
-	config/sh/shrc.d/defaults.sh \
-	config/sh/shrc.d/functions.sh \
-	config/sh/shrc.d/prompt.sh \
-	config/sh/shrc.d/prompt_command.sh \
-	config/sh/shrc.d/title.sh \
-	config/sh/shrc.d/vars.sh \
-	profile \
-	vimrc \
-`
-
-# Check if all source files exist.
-if [ "$check" = "1" ]; then
-	status=0
-	IFS=':'
-	for i in $files; do
-		if [ ! -f "$i" ]; then
-			echo "missing file: $i" >&2
-			status=1
-		fi
-	done
-	exit $status
+# If we already have a cache, read it.
+if [ -f ./INSTALL.cache ]; then
+	. ./INSTALL.cache
 fi
 
-# Create directories.
-IFS=':'
-for i in $dirs; do
-	cmd mkdir "$HOME/.$i"
+# Ask user for information that we should know.
+ask_questions
+
+# Process '*.in' files.
+for i in `find . -name '*.in'`; do
+	out="`dirname $i`/`basename "$i" .in`"
+	process_file "$i" >"$out"
 done
 
-# Install files.
-IFS=':'
-for i in $files; do
-	cmd cp "$i" "$HOME/.$i"
-done
+# Move the files into place.
+install_dotfiles
