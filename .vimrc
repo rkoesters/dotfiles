@@ -10,7 +10,7 @@ set encoding=utf8
 
 set autoindent
 set background=dark
-set formatoptions=tcqrn
+set formatoptions=qrn
 set noexpandtab
 set nowrap
 set scrolloff=2
