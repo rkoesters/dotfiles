@@ -17,7 +17,7 @@ set scrolloff=2
 set spell
 set title
 
-auto BufRead,BufReadCmd,FileReadCmd * let &titlestring=expand("%:p")
+auto BufRead * let &titlestring=expand("%:p")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
