@@ -1,7 +1,7 @@
 # Runs before every prompt.
 prompt_command () {
 	case $TERM in
-		xterm*|rxvt*|stterm*)
+		xterm*|rxvt*|st*|screen*)
 			set_xterm_title "$(get_title_string)"
 			;;
 		9term|dumb)
