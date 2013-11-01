@@ -22,3 +22,5 @@ get_title_string () {
 	#echo "$USER@$HOSTNAME:$pwd"
 	pwd
 }
+
+PROMPT_COMMAND="prompt_command"
