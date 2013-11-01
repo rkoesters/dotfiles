@@ -25,7 +25,7 @@ get_full_username () {
 }
 
 ask_questions() {
-	FULLNAME=${FULLNAME:-`get_full_username`}
+	FULLNAME=${FULLNAME:-$(get_full_username)}
 	printf 'Full name [%s]: ' "$FULLNAME"
 	read input
 	if [ "$input" != "" ]; then
@@ -92,8 +92,8 @@ fi
 ask_questions
 
 # Process '*.in' files.
-for i in `find . -name '*.in'`; do
-	out="`dirname $i`/`basename "$i" .in`"
+for i in $(find . -name '*.in'); do
+	out="$(dirname $i)/$(basename "$i" .in)"
 	process_file "$i" >"$out"
 done
 
