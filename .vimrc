@@ -13,18 +13,16 @@ set background=dark
 set formatoptions=qrn
 set noexpandtab
 set nowrap
+set number
 set scrolloff=2
 set spell
 set title
 
-auto BufRead * let &titlestring=expand("%:p")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
 
-if exists("+colorcolumn")
-	set colorcolumn=+1
-endif
+auto BufRead * let &titlestring=expand("%:p")
 
 if exists("$tabstop")
 	let &tabstop=$tabstop
