@@ -17,7 +17,8 @@ prompt_command () {
 
 # Get string used for terminal title.
 get_title_string () {
-	pwd=$(pwd | sed "s#$HOME#~#")
-
-	echo "$USER@$HOSTNAME:$pwd"
+	#pwd=$(pwd | sed "s#$HOME#~#")
+	#
+	#echo "$USER@$HOSTNAME:$pwd"
+	pwd
 }
