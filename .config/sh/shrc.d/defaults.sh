@@ -5,8 +5,7 @@ check_exist () {
 }
 
 # Find which web browser to use.
-#if check_exist chromium-browser
-#then
+#if check_exist chromium-browser; then
 #	BROWSER=chromium-browser
 #else
 #	BROWSER=firefox
@@ -21,19 +20,16 @@ case $termprog in
 		;;
 	*)
 		# Find the text editor.
-		if check_exist vim
-		then
+		if check_exist vim; then
 			EDITOR=vim
-		elif check_exist vi
-		then
+		elif check_exist vi; then
 			EDITOR=vi
 		else
 			EDITOR=ed
 		fi
 
 		# Find the pager.
-		if check_exist less
-		then
+		if check_exist less; then
 			PAGER=less
 		else
 			PAGER=more

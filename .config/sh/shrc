@@ -3,8 +3,7 @@
 [ -z "$PS1" ] && return
 
 # Source shell scripts in 'shrc.d/'.
-for i in `dirname $ENV`/shrc.d/*.sh
-do
+for i in $(dirname $ENV)/shrc.d/*.sh; do
 	. $i
 done
 unset i

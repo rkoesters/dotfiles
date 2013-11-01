@@ -2,7 +2,7 @@
 prompt_command () {
 	case $TERM in
 		xterm*|rxvt*|stterm*)
-			set_xterm_title "`get_title_string`"
+			set_xterm_title "$(get_title_string)"
 			;;
 		9term|dumb)
 			# We will get an error if we ever actually use a
@@ -17,7 +17,7 @@ prompt_command () {
 
 # Get string used for terminal title.
 get_title_string () {
-	pwd=`pwd | sed "s#$HOME#~#"`
+	pwd=$(pwd | sed "s#$HOME#~#")
 
 	echo "$USER@$HOSTNAME:$pwd"
 }
