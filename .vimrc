@@ -10,6 +10,7 @@ set encoding=utf8
 
 set autoindent
 set background=dark
+set backup
 set formatoptions=qrn
 set noexpandtab
 set nowrap
@@ -33,11 +34,12 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Backup
+""" Directories
 
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+set backupdir=$XDG_CACHE_HOME/vim
+set directory=$XDG_CACHE_HOME/vim
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
