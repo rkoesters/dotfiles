@@ -8,5 +8,5 @@ if [ -n "$DISPLAY" ]; then
 fi
 
 if [ x"$BASH_VERSION" != x"" ]; then
-	. $ENV
+	set -o posix
 fi
