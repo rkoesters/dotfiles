@@ -13,7 +13,6 @@ set background=dark
 set formatoptions=qrn
 set noexpandtab
 set nowrap
-set number
 set scrolloff=2
 set spell
 set title
