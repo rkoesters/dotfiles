@@ -11,9 +11,6 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
-# VIM
-export MYVIMRC=$XDG_CONFIG_HOME/vim/vimrc
-
 if [ -n "$DISPLAY" ]; then
 	9 plumber
 fi
