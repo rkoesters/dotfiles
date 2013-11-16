@@ -5,12 +5,11 @@ check_exist () {
 }
 
 # Find which web browser to use.
-#if check_exist chromium-browser; then
-#	BROWSER=chromium-browser
-#else
-#	BROWSER=firefox
-#fi
-BROWSER=firefox
+if check_exist chromium-browser; then
+	BROWSER=chromium-browser
+else
+	BROWSER=firefox
+fi
 
 # Find EDITOR and PAGER.
 case $termprog in

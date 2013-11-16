@@ -1,5 +1,3 @@
-export HOSTNAME="$(hostname | sed 's/\..*$//')"
-export USER="$(whoami)"
 export ENV="$HOME/.config/sh/shrc"
 
 export GOPATH="$HOME/go"

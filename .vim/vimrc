@@ -13,8 +13,8 @@ set background=dark
 set formatoptions=qrn
 set noexpandtab
 set nowrap
+set paste
 set scrolloff=2
-set spell
 set title
 
 
@@ -46,5 +46,4 @@ set directory=~/.vim/tmp
 syntax on
 au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.vala,*.vapi setfiletype vala
-
 
