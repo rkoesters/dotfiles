@@ -1,38 +1,26 @@
-# Check if the executable exists.
-check_exist () {
-	which "$@" >/dev/null 2>/dev/null
-	return $?
+# Return the first argument that exists as executable.
+get_exist() {
+	for i in "$@"; do
+		if which "$i" >/dev/null 2>/dev/null; then
+			echo "$i"
+			return
+		fi
+	done
+	return 1
 }
 
 # Find which web browser to use.
-if check_exist chromium-browser; then
-	BROWSER=chromium-browser
-else
-	BROWSER=firefox
-fi
+BROWSER=$(get_exist firefox chromium-browser lynx)
 
 # Find EDITOR and PAGER.
 case $termprog in
 	9term|win)
-		PAGER=cat
 		EDITOR=E
+		PAGER=cat
 		;;
 	*)
-		# Find the text editor.
-		if check_exist vim; then
-			EDITOR=vim
-		elif check_exist vi; then
-			EDITOR=vi
-		else
-			EDITOR=ed
-		fi
-
-		# Find the pager.
-		if check_exist less; then
-			PAGER=less
-		else
-			PAGER=more
-		fi
+		EDITOR=$(get_exist vim vi ed)
+		PAGER=$(get_exist less more)
 		;;
 esac
 
