@@ -13,7 +13,7 @@ get_exist() {
 export BROWSER=$(get_exist firefox chromium-browser lynx)
 
 # Find EDITOR and PAGER.
-case $termprog in
+case "$termprog" in
 	9term|win)
 		export EDITOR=E
 		export PAGER=cat

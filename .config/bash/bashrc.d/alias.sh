@@ -1,4 +1,4 @@
-#case $termprog in
+#case "$termprog" in
 #	9term|win)
 #		alias ls='ls -F'
 #		;;
