@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 
 # List of files that should not be installed.
@@ -19,7 +19,7 @@ usage () {
 }
 
 get_full_username () {
-	getent passwd $USER |
+	getent passwd "$USER" |
 	cut -d ':' -f 5 |
 	cut -d ',' -f 1
 }
@@ -28,13 +28,13 @@ get_full_username () {
 process_file () {
 	env |
 	sed 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' |
-	sed -f /dev/stdin $1
+	sed -f /dev/stdin "$1"
 }
 
 # Parse arguments.
 rsync_args=
 while [ $# -gt 0 ]; do
-	case $1 in
+	case "$1" in
 		-n|--dry-run)
 			rsync_args="$rsync_args -n"
 			;;
@@ -62,22 +62,19 @@ fi
 
 
 # Ask user for information that we should know.
-FULLNAME=${FULLNAME:-$(get_full_username)}
+export FULLNAME="${FULLNAME:-$(get_full_username)}"
 printf 'Full name [%s]: ' "$FULLNAME"
 read input
 if [ "$input" != "" ]; then
-	FULLNAME="$input"
+	export FULLNAME="$input"
 fi
 
-EMAIL=${EMAIL:-"$USER@localhost"}
+export EMAIL="${EMAIL:-"$USER@localhost"}"
 printf 'Email address [%s]: ' "$EMAIL"
 read input
 if [ "$input" != "" ]; then
-	EMAIL="$input"
+	export EMAIL="$input"
 fi
-
-unset input
-export EMAIL FULLNAME
 
 
 # Build cache.
@@ -88,11 +85,11 @@ sed -e 's/=/=\"/g' -e 's/$/\"/g' >./INSTALL.cache
 
 # Process '*.in' files.
 for i in $(find . -name '*.in'); do
-	out="$(dirname $i)/$(basename "$i" .in)"
+	out="$(dirname "$i")/$(basename "$i" .in)"
 	process_file "$i" >"$out"
 done
 
 
 # Install the files.
 echo "$exclude" |
-rsync -a $rsync_args --exclude-from /dev/stdin . $HOME
+rsync -a $rsync_args --exclude-from /dev/stdin . "$HOME"
