@@ -13,7 +13,8 @@ set background=dark
 set formatoptions=qrn
 set noexpandtab
 set nowrap
-set paste
+"set paste
+set ruler
 set scrolloff=2
 set title
 
