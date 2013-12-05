@@ -10,18 +10,16 @@ get_exist() {
 }
 
 # Find which web browser to use.
-BROWSER=$(get_exist firefox chromium-browser lynx)
+export BROWSER=$(get_exist firefox chromium-browser lynx)
 
 # Find EDITOR and PAGER.
 case $termprog in
 	9term|win)
-		EDITOR=E
-		PAGER=cat
+		export EDITOR=E
+		export PAGER=cat
 		;;
 	*)
-		EDITOR=$(get_exist vim vi ed)
-		PAGER=$(get_exist less more)
+		export EDITOR=$(get_exist vim vi ed)
+		export PAGER=$(get_exist less more)
 		;;
 esac
-
-export BROWSER EDITOR PAGER
