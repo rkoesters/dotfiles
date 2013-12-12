@@ -14,6 +14,6 @@ if [ -z "$PROFILE_ALREADY_READ" ]; then
 fi
 export PROFILE_ALREADY_READ=1
 
-if [ "$PS1" ]; then
+if [ -n "$PS1" ]; then
 	. "$HOME/.bashrc"
 fi
