@@ -10,7 +10,7 @@ get_exist() {
 }
 
 # Find which web browser to use.
-export BROWSER=$(get_exist firefox chromium-browser lynx)
+export BROWSER=$(get_exist google-chrome chromium-browser firefox lynx)
 
 # Find EDITOR and PAGER.
 case "$termprog" in
