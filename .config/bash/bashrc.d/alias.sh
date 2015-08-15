@@ -7,3 +7,4 @@ case "$termprog" in
 		alias tree='_tree'
 		;;
 esac
+alias open="xdg-open"
