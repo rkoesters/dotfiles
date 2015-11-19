@@ -8,6 +8,11 @@ case "$termprog" in
 		;;
 esac
 
+# Some ls aliases
+alias ll='ls -alF'
+alias la='ls -a'
+alias l='ls -CF'
+
 # I never use openvt, would rather have open point to xdg-open.
 alias open="xdg-open"
 
