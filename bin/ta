@@ -1,2 +1,2 @@
 #!/bin/sh
-t -a -I '.git' "$@"
+exec t -a -I '.git' "$@"
