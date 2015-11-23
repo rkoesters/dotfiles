@@ -97,4 +97,4 @@ esac
 # MOTD
 # ----------------------------------------------------------------------
 
-fortune | cowsay -W $textwidth
+fortune -s | cowsay
