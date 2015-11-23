@@ -35,14 +35,6 @@ set_xterm_title () {
 	printf '\033]0;%s\007' "$@"
 }
 
-_tree () {
-	if [ -t 1 ]; then
-		command tree -C "$@"
-	else
-		command tree "$@"
-	fi
-}
-
 # ----------------------------------------------------------------------
 # ALIASES
 # ----------------------------------------------------------------------
@@ -53,7 +45,6 @@ case "$termprog" in
 		;;
 	*)
 		alias ls='ls -p --color=auto'
-		alias tree='_tree'
 		;;
 esac
 
