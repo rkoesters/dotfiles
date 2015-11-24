@@ -1,4 +1,3 @@
-export BASH_CONFIG_DIR="$HOME/.config/bash"
 export GOPATH="$HOME/go"
 
 export tabstop=8
