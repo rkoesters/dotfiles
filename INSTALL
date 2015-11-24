@@ -14,9 +14,10 @@ usage () {
 	echo "Usage: $0 [OPTIONS]"
 	echo
 	echo "Options:"
-	echo "  -n, --dry-run  Do not execute commands."
-	echo "  -v, --verbose  Print each command as they are executed."
-	echo "  -h, --help     Display help message and exit."
+	echo "  -n, --dry-run    Do not execute commands."
+	echo "  -v, --verbose    Print each command as they are executed."
+	echo "  -l, --bashlocal  Move .bashrc to .bashrc.local instead."
+	echo "  -h, --help       Display help message and exit."
 }
 
 get_full_username () {
@@ -41,6 +42,9 @@ while [ $# -gt 0 ]; do
 			;;
 		-v|--verbose)
 			rsync_args="$rsync_args -v"
+			;;
+		-l|--bashlocal)
+			bash_local=1
 			;;
 		-h|--help)
 			usage >&2
@@ -90,7 +94,16 @@ for i in $(find . -name '*.in'); do
 	process_file "$i" >"$out"
 done
 
+# Move .bashrc to .bashrc.local first.
+if [ "$bash_local" = "1" ]; then
+	mv .bashrc .bashrc.local
+fi
 
 # Install the files.
 echo "$exclude" |
 rsync -a $rsync_args --exclude-from /dev/stdin . "$HOME"
+
+# Put .bashrc back to where it was.
+if [ "$bash_local" = "1" ]; then
+	mv .bashrc.local .bashrc
+fi
