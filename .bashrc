@@ -19,6 +19,13 @@ export LC_COLLATE=C
 unset GIT_ASKPASS
 unset SSH_ASKPASS
 
+# I always use ^D to exit the shell, so it better work.
+set +o ignoreeof
+# I want my shell to trust my judgement, no matter how dangerous that is.
+set +o noclobber
+# Update LINES and COLUMNS after every command.
+shopt -s checkwinsize
+
 # ----------------------------------------------------------------------
 # FUNCTIONS
 # ----------------------------------------------------------------------
