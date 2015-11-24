@@ -13,6 +13,7 @@ set background=light
 set formatoptions=qrn
 set noexpandtab
 set nowrap
+set number
 "set paste
 set ruler
 set scrolloff=2
