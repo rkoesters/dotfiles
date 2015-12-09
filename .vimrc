@@ -19,6 +19,8 @@ set ruler
 set scrolloff=2
 set title
 
+filetype plugin on
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
