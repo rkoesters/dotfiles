@@ -104,4 +104,10 @@ esac
 # MOTD
 # ----------------------------------------------------------------------
 
-fortune -s | cowsay -f tux
+if get_exist fortune >/dev/null; then
+	if get_exist cowsay >/dev/null; then
+		fortune -s | cowsay -f tux
+	else
+		fortune -s
+	fi
+fi
