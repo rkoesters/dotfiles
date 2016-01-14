@@ -12,9 +12,8 @@ set autoindent
 set background=light
 set formatoptions=qrn
 set noexpandtab
-set nowrap
-set number
-"set paste
+set wrap
+"set number
 set ruler
 set scrolloff=2
 set title
