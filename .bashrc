@@ -106,8 +106,8 @@ esac
 
 if get_exist fortune >/dev/null; then
 	if get_exist cowsay >/dev/null; then
-		fortune -s | cowsay -f tux
+		fortune -s | cowsay -f tux | $(get_exist lolcat cat)
 	else
-		fortune -s
+		fortune -s | $(get_exist lolcat cat)
 	fi
 fi
