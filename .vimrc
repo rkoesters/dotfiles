@@ -9,7 +9,7 @@ set encoding=utf8
 """ Basic Options
 
 set autoindent
-set background=light
+set background=dark
 set formatoptions=qrn
 set noexpandtab
 set wrap
