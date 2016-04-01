@@ -13,7 +13,7 @@ set background=dark
 set formatoptions=qrn
 set noexpandtab
 set wrap
-"set number
+set number
 set ruler
 set scrolloff=2
 set title
