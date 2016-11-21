@@ -91,7 +91,7 @@ PS4='+ '
 
 case "$TERM" in
 	xterm*|rxvt*|screen*)
-		PROMPT_COMMAND='set_xterm_title "$USER@$HOSTNAME:$PWD"'
+		PROMPT_COMMAND+='set_xterm_title "$USER@$HOSTNAME:$PWD"'
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
