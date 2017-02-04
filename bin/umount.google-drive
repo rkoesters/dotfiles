@@ -1,0 +1,2 @@
+#!/bin/sh
+fusermount -u "$HOME/Google Drive"
