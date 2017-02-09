@@ -48,5 +48,5 @@ set directory=~/.vim/tmp
 filetype plugin on
 syntax on
 au BufRead,BufNewFile *.md set filetype=markdown
-au BufRead,BufNewFile *.vala,*.vapi set filetype vala
+au BufRead,BufNewFile *.vala,*.vapi set filetype=vala
 au BufRead,BufNewFile *.go set filetype=go
