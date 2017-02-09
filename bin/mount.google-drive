@@ -1,2 +1,2 @@
 #!/bin/sh
-google-drive-ocamlfuse "$HOME/Google Drive"
+google-drive-ocamlfuse "$HOME/mnt/Google Drive"

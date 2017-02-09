@@ -1,2 +1,2 @@
 #!/bin/sh
-fusermount -u "$HOME/Google Drive"
+fusermount -u "$HOME/mnt/Google Drive"
