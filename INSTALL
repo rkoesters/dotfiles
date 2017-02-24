@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/data/data/com.termux/files/usr/bin/env bash
 set -e
 
 # List of files that should not be installed.
@@ -30,7 +30,7 @@ get_full_username () {
 process_file () {
 	env |
 	sed 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' |
-	sed -f /dev/stdin "$1"
+	sed -f /proc/self/fd/0 "$1"
 }
 
 # Parse arguments.
@@ -101,7 +101,7 @@ fi
 
 # Install the files.
 echo "$exclude" |
-rsync -a $rsync_args --exclude-from /dev/stdin . "$HOME"
+rsync -a $rsync_args --exclude-from /proc/self/fd/0 . "$HOME"
 
 # Put .bashrc back to where it was.
 if [ "$bash_local" = "1" ]; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/data/data/com.termux/files/usr/bin/sh
 echo "HOSTNAME: $(hostname)"
 echo "USER:     $(whoami)"
 echo "PWD:      $(pwd)"
