@@ -60,7 +60,7 @@ case "$termprog" in
 esac
 
 # Send a notification about the previous command.
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo utilities-terminal || echo dialog-error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias alert='termux-notification --content "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ----------------------------------------------------------------------
 # DEFAULT PROGRAMS
