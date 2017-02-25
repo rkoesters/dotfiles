@@ -104,10 +104,12 @@ esac
 # MOTD
 # ----------------------------------------------------------------------
 
-if get_exist fortune >/dev/null; then
+if [ "$BASHRC_MOTD_ALREADY_SHOWN" = "" ] && get_exist fortune >/dev/null; then
 	if get_exist cowsay >/dev/null; then
 		fortune -s | cowsay -f tux | $(get_exist lolcat cat)
 	else
 		fortune -s | $(get_exist lolcat cat)
 	fi
+	BASHRC_MOTD_ALREADY_SHOWN=1
+	export BASHRC_MOTD_ALREADY_SHOWN
 fi
