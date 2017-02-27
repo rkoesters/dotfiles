@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ls -CF --color=auto "$@"
+exec ls -p --color=auto "$@"
