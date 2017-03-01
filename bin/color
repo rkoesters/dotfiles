@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/sh
+if [ $# = 0 ]; then
+	pygmentize -g
+else
+	for i in "$@"; do
+		pygmentize -g "$i"
+	done
+fi
