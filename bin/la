@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ls -pA --color=auto "$@"
+exec l -A "$@"
