@@ -1,4 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/sh
+echo "MACHINE:  $(uname -m)"
+echo "KERNEL:   $(uname -s)"
+echo "RELEASE:  $(uname -r)"
 echo "HOSTNAME: $(hostname)"
 echo "USER:     $(whoami)"
 echo "PWD:      $(pwd)"
