@@ -8,7 +8,6 @@ set encoding=utf8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Basic Options
 
-set autoindent
 set background=dark
 set formatoptions=qrn
 set noexpandtab
