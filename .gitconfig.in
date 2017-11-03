@@ -7,3 +7,7 @@
 
 [push]
 	default = simple
+
+[web]
+	# Use our included "open" script.
+	browser = open
