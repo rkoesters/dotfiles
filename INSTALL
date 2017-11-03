@@ -69,14 +69,14 @@ fi
 # Ask user for information that we should know.
 export FULLNAME="${FULLNAME:-$(get_full_username)}"
 printf 'Full name [%s]: ' "$FULLNAME"
-read input
+read -r input
 if [ "$input" != "" ]; then
 	export FULLNAME="$input"
 fi
 
 export EMAIL="${EMAIL:-"$USER@localhost"}"
 printf 'Email address [%s]: ' "$EMAIL"
-read input
+read -r input
 if [ "$input" != "" ]; then
 	export EMAIL="$input"
 fi
