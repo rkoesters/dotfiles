@@ -7,7 +7,7 @@ exclude='
 .git/*
 .gitignore
 INSTALL*
-README
+README.md
 '
 
 usage () {
