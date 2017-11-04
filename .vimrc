@@ -8,7 +8,6 @@ set encoding=utf8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Basic Options
 
-set autoindent
 set background=dark
 set formatoptions=qrn
 set noexpandtab
@@ -24,7 +23,7 @@ set nofoldenable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
 
-auto BufRead * let &titlestring=expand("%:p")
+auto BufRead * let &titlestring=expand("%t")
 
 if exists("$tabstop")
 	let &tabstop=$tabstop
