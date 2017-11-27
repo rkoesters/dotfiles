@@ -14,10 +14,10 @@ usage () {
 	echo "Usage: $0 [OPTIONS]"
 	echo
 	echo "Options:"
+	echo "  -h, --help       Display help message and exit."
+	echo "  -l, --bashlocal  Move .bashrc to .bashrc.local instead."
 	echo "  -n, --dry-run    Do not execute commands."
 	echo "  -v, --verbose    Print each command as they are executed."
-	echo "  -l, --bashlocal  Move .bashrc to .bashrc.local instead."
-	echo "  -h, --help       Display help message and exit."
 }
 
 get_full_username () {
@@ -37,18 +37,18 @@ process_file () {
 rsync_args=
 while [ $# -gt 0 ]; do
 	case "$1" in
+		-h|--help)
+			usage >&2
+			exit 0
+			;;
+		-l|--bashlocal)
+			bash_local=1
+			;;
 		-n|--dry-run)
 			rsync_args="$rsync_args -n"
 			;;
 		-v|--verbose)
 			rsync_args="$rsync_args -v"
-			;;
-		-l|--bashlocal)
-			bash_local=1
-			;;
-		-h|--help)
-			usage >&2
-			exit 0
 			;;
 		*)
 			echo "unknown option: $1" >&2
