@@ -10,7 +10,7 @@ INSTALL*
 README.md
 '
 
-usage () {
+usage() {
 	echo "Usage: $0 [OPTIONS]"
 	echo
 	echo "Options:"
@@ -20,14 +20,14 @@ usage () {
 	echo "  -v, --verbose    Print each command as they are executed."
 }
 
-get_full_username () {
+get_full_username() {
 	getent passwd "$USER" |
 	cut -d ':' -f 5 |
 	cut -d ',' -f 1
 }
 
 # Expands environmental variables in file.
-process_file () {
+process_file() {
 	env |
 	sed 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' |
 	sed -f /dev/stdin "$1"
