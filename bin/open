@@ -24,13 +24,13 @@
 #--------------------------
 
 # Display error message and set return value.
-error () {
+error() {
 	echo error: "$@" >&2
 	ret=1
 }
 
 # Try to open the given file.
-open_uri () {
+open_uri() {
 	xdg-open "$@" >/dev/null 2>/dev/null </dev/null
 	case $? in
 		0) return ;;
