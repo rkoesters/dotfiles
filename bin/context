@@ -2,6 +2,6 @@
 echo "MACHINE:  $(uname -m)"
 echo "KERNEL:   $(uname -s)"
 echo "RELEASE:  $(uname -r)"
-echo "HOSTNAME: $(hostname)"
+echo "HOSTNAME: $(uname -n)"
 echo "USER:     $(whoami)"
 echo "PWD:      $(pwd)"

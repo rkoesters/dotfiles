@@ -1,2 +1,2 @@
 #!/data/data/com.termux/files/usr/bin/sh
-google-drive-ocamlfuse "$HOME/mnt/Google Drive"
+exec google-drive-ocamlfuse "$HOME/mnt/Google Drive"

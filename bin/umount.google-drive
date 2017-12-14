@@ -1,2 +1,2 @@
 #!/data/data/com.termux/files/usr/bin/sh
-fusermount -u "$HOME/mnt/Google Drive"
+exec fusermount -u "$HOME/mnt/Google Drive"
