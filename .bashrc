@@ -92,6 +92,7 @@ PS4='+ '
 case "$TERM" in
 	xterm*|rxvt*|screen*)
 		PROMPT_COMMAND+='set_xterm_title "$PWD"'
+		trap 'set_xterm_title "$PWD - $BASH_COMMAND"' DEBUG
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
