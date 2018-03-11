@@ -1,2 +1,2 @@
 #!/bin/sh
-exec l -l "$@"
+exec l -l -h "$@"
