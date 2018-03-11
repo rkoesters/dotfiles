@@ -14,7 +14,6 @@ set noexpandtab
 set wrap
 set number
 set ruler
-set colorcolumn=80
 set scrolloff=2
 set title
 set nofoldenable
