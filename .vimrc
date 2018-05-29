@@ -22,7 +22,7 @@ set nofoldenable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
 
-auto BufRead * let &titlestring=getcwd() . " - vim - " . expand("%")
+auto BufEnter * let &titlestring=getcwd() . " - vim - " . expand("%")
 
 if exists("$tabstop")
 	let &tabstop=$tabstop
