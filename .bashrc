@@ -91,7 +91,14 @@ PS4='+ '
 
 case "$TERM" in
 	xterm*|rxvt*|screen*)
-		PROMPT_COMMAND+='set_xterm_title "$PWD"'
+		# Show current directory in xterm title.
+		if [[ $PROMPT_COMMAND = "" ]] || [[ $PROMPT_COMMAND = *\; ]]; then
+			PROMPT_COMMAND+='set_xterm_title "$PWD";'
+		else
+			PROMPT_COMMAND+=';set_xterm_title "$PWD";'
+		fi
+
+		# Show command in xterm title.
 		trap 'set_xterm_title "$PWD - $BASH_COMMAND"' DEBUG
 		;;
 	9term|dumb)
