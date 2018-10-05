@@ -15,6 +15,7 @@ set wrap
 set number
 set ruler
 set scrolloff=2
+set colorcolumn=81
 set title
 set nofoldenable
 
