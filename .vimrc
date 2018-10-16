@@ -11,7 +11,7 @@ set encoding=utf8
 set background=dark
 set formatoptions=qrn
 set noexpandtab
-set wrap
+set nowrap
 set number
 set ruler
 set scrolloff=2
