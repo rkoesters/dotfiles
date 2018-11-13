@@ -52,9 +52,11 @@ set_xterm_title() {
 
 case "$termprog" in
 	9term|win)
+		alias diff='diff -u'
 		alias ls='ls -F'
 		;;
 	*)
+		alias diff='diff -u --color=auto'
 		alias ls='ls -p --color=auto'
 		;;
 esac
