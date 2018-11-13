@@ -1,4 +1,4 @@
-export tabstop=4
+export tabstop=8
 export textwidth=72
 
 export GOPATH="$HOME/go"
