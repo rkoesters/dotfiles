@@ -8,7 +8,6 @@ set encoding=utf8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Basic Options
 
-set background=dark
 set formatoptions=qrn
 set noexpandtab
 set nowrap
@@ -31,6 +30,10 @@ endif
 
 if exists("$textwidth")
 	let &textwidth=$textwidth
+endif
+
+if executable('detect-terminal-theme.sh')
+	let &background=systemlist('detect-terminal-theme.sh')[0]
 endif
 
 
