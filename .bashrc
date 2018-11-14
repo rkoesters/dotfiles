@@ -99,7 +99,7 @@ PS4='+ '
 case "$TERM" in
 	xterm*|rxvt*|screen*)
 		# Show current directory in xterm title.
-		if [[ $PROMPT_COMMAND = "" ]] || [[ $PROMPT_COMMAND = *\; ]]; then
+		if [ -z "$PROMPT_COMMAND" ] || [[ $PROMPT_COMMAND =~ \;[:space:]*$ ]]; then
 			PROMPT_COMMAND+='set_xterm_title "$PWD";'
 		else
 			PROMPT_COMMAND+=';set_xterm_title "$PWD";'
@@ -119,7 +119,7 @@ esac
 # MOTD
 # ----------------------------------------------------------------------
 
-if [ "$BASHRC_MOTD_ALREADY_SHOWN" = "" ] && get_exist fortune >/dev/null; then
+if [ -z "$BASHRC_MOTD_ALREADY_SHOWN" ] && get_exist fortune >/dev/null; then
 	if get_exist cowsay >/dev/null; then
 		fortune -s | cowsay -f tux
 	else
