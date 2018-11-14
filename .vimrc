@@ -32,10 +32,6 @@ if exists("$textwidth")
 	let &textwidth=$textwidth
 endif
 
-if executable('detect-terminal-theme.sh')
-	let &background=systemlist('detect-terminal-theme.sh')[0]
-endif
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Backup
