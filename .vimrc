@@ -24,15 +24,15 @@ set nofoldenable
 
 auto BufEnter * let &titlestring=getcwd() . " - vim - " . expand("%")
 
-if exists($tabstop)
+if exists("$tabstop")
 	let &tabstop=$tabstop
 endif
 
-if exists($textwidth)
+if exists("$textwidth")
 	let &textwidth=$textwidth
 endif
 
-if exists($TMUX)
+if exists("$TMUX")
 	set background=dark
 endif
 
