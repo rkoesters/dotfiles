@@ -4,6 +4,7 @@ set -e
 # List of files that should not be installed.
 exclude='
 *.in
+.editorconfig
 .git/*
 .gitignore
 INSTALL*
