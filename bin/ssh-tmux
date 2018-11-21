@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/bin/sh
 if [ $# -eq 0 ]; then
 	echo "usage: $0 [user@]hostname" >&2
 	exit 1

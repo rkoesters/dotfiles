@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/bin/sh
 echo "MACHINE:  $(uname -m)"
 echo "KERNEL:   $(uname -s)"
 echo "RELEASE:  $(uname -r)"

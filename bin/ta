@@ -1,2 +1,2 @@
-#!/data/data/com.termux/files/usr/bin/sh
+#!/bin/sh
 exec t -a -I '.git' "$@"
