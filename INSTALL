@@ -29,10 +29,9 @@ get_full_username() {
 
 # Expands environmental variables in file.
 process_file() {
-	env -0 | # Print all environmental variables separated by null.
-	sed -z 's/.*\n.*//g' | # Filter out all variables containing a newline.
-	sed -z 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' | # Convert variables into sed expressions.
-	tr '\0' '\n' | # Convert null to newline.
+	env | # Print all environmental variables.
+	sed 's/.*\n.*//g' | # Filter out all variables containing a newline.
+	sed 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' | # Convert variables into sed expressions.
 	sed -f /proc/self/fd/0 "$1" # Apply substitutions to file.
 }
 
