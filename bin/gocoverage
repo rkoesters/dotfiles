@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+output="/tmp/gocoverage-$$.out"
+go test -coverprofile="$output" "$@"
+go tool cover -html="$output"
+rm -f "$output"

@@ -1,0 +1,22 @@
+#!/bin/sh -eu
+if [ $# = 0 ]; then
+	echo "running go fmt"
+	go fmt
+
+	echo "running go vet"
+	go vet
+
+	echo "running golint"
+	golint
+else
+	for arg in "$@"; do
+		echo "running go fmt $arg"
+		go fmt "$arg"
+
+		echo "running go vet $arg"
+		go vet "$arg"
+
+		echo "running golint $arg"
+		golint "$arg"
+	done
+fi
