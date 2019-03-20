@@ -1,5 +1,4 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
 # List of files that should not be installed.
 exclude='
