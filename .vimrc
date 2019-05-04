@@ -14,7 +14,7 @@ set nowrap
 set number
 set ruler
 set scrolloff=2
-set colorcolumn=81
+set colorcolumn=+1
 set title
 set nofoldenable
 
