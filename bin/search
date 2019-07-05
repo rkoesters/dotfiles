@@ -1,3 +1,2 @@
 #!/bin/sh
-q=$(echo "$@")
-exec open "https://www.google.com/search?q=$q"
+exec open "https://www.google.com/search?q=$*"
