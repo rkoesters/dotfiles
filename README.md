@@ -1,12 +1,10 @@
 My configuration files.
 
-Usage
------
+## Usage
 
 Run `./INSTALL` from the root of the repository.
 
-Requirements
-------------
+## Requirements
 
 * POSIX-compatible shell
 * rsync
