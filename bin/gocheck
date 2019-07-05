@@ -1,22 +1,20 @@
-#!/bin/sh -eu
+#!/bin/sh
+set -eu
+
+# run lets us simulate 'set -x' without printing the if condition as well.
+run() {
+	echo "$PS4$*"
+	"$@"
+}
+
 if [ $# = 0 ]; then
-	echo "running go fmt"
-	go fmt
-
-	echo "running go vet"
-	go vet
-
-	echo "running golint"
-	golint
+	run go fmt
+	run go vet
+	run golint
 else
 	for arg in "$@"; do
-		echo "running go fmt $arg"
-		go fmt "$arg"
-
-		echo "running go vet $arg"
-		go vet "$arg"
-
-		echo "running golint $arg"
-		golint "$arg"
+		run go fmt "$arg"
+		run go vet "$arg"
+		run golint "$arg"
 	done
 fi
