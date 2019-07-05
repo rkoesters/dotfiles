@@ -110,7 +110,8 @@ PS4='+ '
 case "$TERM" in
 	xterm*|rxvt*|screen*)
 		# Show current directory in xterm title.
-		if [ -z "$PROMPT_COMMAND" ] || [[ $PROMPT_COMMAND =~ \;[:space:]*$ ]]; then
+		last_line_of_prompt_command=$(echo "$PROMPT_COMMAND" | tail -n1)
+		if [[ "$last_line_of_prompt_command" =~ [:space:]*$ ]] || [[ "$last_line_of_prompt_command" =~ \;[:space:]*$ ]]; then
 			PROMPT_COMMAND+='set_xterm_title "$PWD";'
 		else
 			PROMPT_COMMAND+=';set_xterm_title "$PWD";'
