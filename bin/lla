@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ll -A "$@"
+exec ll -a "$@"
