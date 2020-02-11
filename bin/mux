@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+session="${1:-default}"
+
+if tmux new-session -d -s "$session"; then
+	tmux send-keys -t "$session:0.0" "irssi" Enter
+	tmux new-window -t "$session"
+fi
+exec tmux attach -t "$session"
