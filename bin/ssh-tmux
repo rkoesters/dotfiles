@@ -5,11 +5,11 @@ if [ $# -eq 0 ]; then
 fi
 session="$(basename $0)"
 exec ssh -t "$@" "
-tmux attach ||
+tmux attach-session ||
 (
-	tmux new -d -s \"$session\" &&
+	tmux new-session -d -s \"$session\" &&
 	tmux send-keys -t \"$session:0.0\" \"exec irssi\" Enter &&
 	tmux new-window -a -t \"$session:0\" &&
-	tmux attach -t \"$session\"
+	tmux attach-session -t \"$session\"
 )
 "
