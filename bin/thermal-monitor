@@ -1,8 +1,12 @@
 #!/bin/sh
 set -eu
 
+exec_watch () {
+	exec watch -d -n 1 "$@"
+}
+
 if lsb_release -i | grep -q "Raspbian"; then
-	exec watch -n 1 vcgencmd measure_temp
+	exec_watch vcgencmd measure_temp
 else
-	exec watch -n 1 -d sensors
+	exec_watch sensors
 fi
