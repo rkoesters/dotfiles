@@ -6,7 +6,7 @@ set -eu
 session="$(basename $0)"
 
 usage () {
-	echo "usage: $0 [ -h | -t session_name ] [user@]hostname"
+	echo "usage: $0 [-h | -t session_name] [ssh_flags ...] [user@]hostname"
 }
 
 usage_error () {
