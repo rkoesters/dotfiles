@@ -1,9 +1,46 @@
 #!/bin/sh
-if [ $# -eq 0 ]; then
-	echo "usage: $0 [user@]hostname" >&2
-	exit 1
-fi
+set -eu
+
+# The tmux(1) session name we use defaults to the name of this script. It can be
+# overridden with the `-t` flag.
 session="$(basename $0)"
+
+usage () {
+	echo "usage: $0 [ -h | -t session_name ] [user@]hostname"
+}
+
+usage_error () {
+	usage >&2
+	exit 1
+}
+
+if [ $# -lt 1 ]; then
+	usage_error
+fi
+
+# Our flag processing is very rudimentary, we only check the first argument for
+# a flag we want to overload (our overloaded flags are exclusive of each other),
+# otherwise we pass all arguments to ssh(1).
+case "$1" in
+	-h)
+		usage
+		exit
+		;;
+	-t)
+		if [ $# -lt 2 ]; then
+			echo "session_name required with -t flag" >&2
+			usage_error
+		fi
+
+		session="$2"
+
+		# Remove `-t` and the session name from our list of arguments
+		# because we pass `$@` to the ssh client.
+		shift
+		shift
+		;;
+esac
+
 exec ssh -t "$@" "
 tmux attach-session -t \"$session\" ||
 (
