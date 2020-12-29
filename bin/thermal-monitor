@@ -1,2 +1,8 @@
 #!/bin/sh
-exec watch -n 1 -d sensors
+set -eu
+
+if lsb_release -i | grep -q "Raspbian"; then
+	exec watch -n 1 vcgencmd measure_temp
+else
+	exec watch -n 1 -d sensors
+fi
