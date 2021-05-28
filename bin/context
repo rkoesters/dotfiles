@@ -2,8 +2,12 @@
 set -eu
 
 echo "MACHINE:  $(uname -m)"
-echo "KERNEL:   $(uname -s)"
-echo "RELEASE:  $(uname -r)"
+echo "KERNEL:   $(uname -s) $(uname -r)"
+
+if type lsb_release >/dev/null 2>&1; then
+	echo "DISTRO:   $(lsb_release -s -d)"
+fi
+
 echo "HOSTNAME: $(uname -n)"
 echo "USER:     $(whoami)"
 echo "PWD:      $(pwd)"
