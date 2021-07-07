@@ -2,6 +2,6 @@
 set -eu
 
 output="/dev/shm/gocoverage-$$.out"
-go test -coverprofile="$output" -covermode=count "$@"
-go tool cover -html="$output"
-rm -f "$output"
+go test -coverprofile="${output:?}" -covermode=count "$@"
+go tool cover -html="${output:?}"
+rm -f "${output:?}"

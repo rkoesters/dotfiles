@@ -48,7 +48,7 @@ ret=0
 
 # Loop through arguments.
 for i in "$@"; do
-	open_uri "$i"
+	open_uri "${i:?}"
 done
 
-exit $ret
+exit ${ret:?}

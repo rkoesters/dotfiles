@@ -1,2 +1,2 @@
 #!/bin/sh
-exec top -u "$USER" -o -PID "$@"
+exec top -u "${USER:?}" -o -PID "$@"

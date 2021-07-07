@@ -3,10 +3,10 @@ set -eu
 
 # The tmux(1) session name we use defaults to the name of this script. It can be
 # overridden with the `-t` flag.
-session="$(basename $0)"
+session="$(basename "${0:?}")"
 
 usage () {
-	echo "usage: $0 [-h | -t session_name] [ssh_flags ...] [user@]hostname"
+	echo "usage: ${0:?} [-h | -t session_name] [ssh_flags ...] [user@]hostname"
 }
 
 usage_error () {
@@ -21,7 +21,7 @@ fi
 # Our flag processing is very rudimentary, we only check the first argument for
 # a flag we want to overload (our overloaded flags are exclusive of each other),
 # otherwise we pass all arguments to ssh(1).
-case "$1" in
+case "${1:?}" in
 	-h)
 		usage
 		exit
@@ -32,7 +32,7 @@ case "$1" in
 			usage_error
 		fi
 
-		session="$2"
+		session="${2:?}"
 
 		# Remove `-t` and the session name from our list of arguments
 		# because we pass `$@` to the ssh client.
@@ -42,11 +42,11 @@ case "$1" in
 esac
 
 exec ssh -t "$@" "
-tmux attach-session -t \"$session\" ||
+tmux attach-session -t \"${session:?}\" ||
 (
-	tmux new-session -d -s \"$session\" &&
-	tmux send-keys -t \"$session:0.0\" \"exec irssi\" Enter &&
-	tmux new-window -a -t \"$session:0\" &&
-	tmux attach-session -t \"$session\"
+	tmux new-session -d -s \"${session:?}\" &&
+	tmux send-keys -t \"${session:?}:0.0\" \"exec irssi\" Enter &&
+	tmux new-window -a -t \"${session:?}:0\" &&
+	tmux attach-session -t \"${session:?}\"
 )
 "
