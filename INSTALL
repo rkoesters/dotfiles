@@ -12,7 +12,7 @@ README.md
 '
 
 usage() {
-	echo "Usage: $0 [OPTIONS]"
+	echo "Usage: ${0:?} [OPTIONS]"
 	echo
 	echo "Options:"
 	echo "  -h, --help       Display help message and exit."
@@ -22,7 +22,7 @@ usage() {
 }
 
 get_full_username() {
-	getent passwd "$USER" |
+	getent passwd "${USER:?}" |
 	cut -d ':' -f 5 |
 	cut -d ',' -f 1
 }
@@ -33,13 +33,13 @@ process_file() {
 	sed -z 's/.*\n.*//g' | # Filter out all variables containing a newline.
 	sed -z 's/[\%]/\\&/g;s/\([^=\]*\)=\(.*\)/s%${\1}%\2%/' | # Convert variables into sed expressions.
 	tr '\0' '\n' | # Convert null to newline.
-	sed -f /dev/stdin "$1" # Apply substitutions to file.
+	sed -f /dev/stdin "${1:?}" # Apply substitutions to file.
 }
 
 # Parse arguments.
 rsync_args=
 while [ $# -gt 0 ]; do
-	case "$1" in
+	case "${1:?}" in
 		-h|--help)
 			usage >&2
 			exit 0
@@ -48,13 +48,13 @@ while [ $# -gt 0 ]; do
 			bash_local=1
 			;;
 		-n|--dry-run)
-			rsync_args="$rsync_args -n"
+			rsync_args="${rsync_args?} -n"
 			;;
 		-v|--verbose)
-			rsync_args="$rsync_args -v"
+			rsync_args="${rsync_args?} -v"
 			;;
 		*)
-			echo "unknown option: $1" >&2
+			echo "unknown option: ${1:?}" >&2
 			usage >&2
 			exit 1
 			;;
@@ -71,17 +71,17 @@ fi
 
 # Ask user for information that we should know.
 export FULLNAME="${FULLNAME:-$(get_full_username)}"
-printf 'Full name [%s]: ' "$FULLNAME"
+printf 'Full name [%s]: ' "${FULLNAME?}"
 read -r input
-if [ "$input" != "" ]; then
-	export FULLNAME="$input"
+if [ "${input?}" != "" ]; then
+	export FULLNAME="${input:?}"
 fi
 
-export EMAIL="${EMAIL:-"$USER@localhost"}"
-printf 'Email address [%s]: ' "$EMAIL"
+export EMAIL="${EMAIL:-"${USER:?}@localhost"}"
+printf 'Email address [%s]: ' "${EMAIL?}"
 read -r input
-if [ "$input" != "" ]; then
-	export EMAIL="$input"
+if [ "${input?}" != "" ]; then
+	export EMAIL="${input:?}"
 fi
 
 
@@ -93,20 +93,20 @@ sed -e 's/=/=\"/g' -e 's/$/\"/g' >./INSTALL.cache
 
 # Process '*.in' files.
 for i in $(find . -name '*.in'); do
-	out="$(dirname "$i")/$(basename "$i" .in)"
-	process_file "$i" >"$out"
+	out="$(dirname "${i:?}")/$(basename "${i:?}" .in)"
+	process_file "${i:?}" >"${out:?}"
 done
 
 # Move .bashrc to .bashrc.local first.
-if [ "$bash_local" = "1" ]; then
+if [ "${bash_local}" = "1" ]; then
 	mv .bashrc .bashrc.local
 fi
 
 # Install the files.
-echo "$exclude" |
-rsync -a $rsync_args --exclude-from /dev/stdin . "$HOME"
+echo "${exclude:?}" |
+rsync -a ${rsync_args?} --exclude-from /dev/stdin . "${HOME:?}"
 
 # Put .bashrc back to where it was.
-if [ "$bash_local" = "1" ]; then
+if [ "${bash_local}" = "1" ]; then
 	mv .bashrc.local .bashrc
 fi
