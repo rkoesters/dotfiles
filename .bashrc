@@ -1,4 +1,4 @@
-[ -z "$PS1" ] && return
+[ -z "${PS1}" ] && return
 
 # ------------------------------------------------------------------------------
 # IMPORTS
@@ -33,8 +33,8 @@ shopt -s checkwinsize
 # Return the first argument that exists as executable.
 get_exist() {
 	for i in "$@"; do
-		if which "$i" >/dev/null 2>/dev/null; then
-			echo "$i"
+		if which "${i:?}" >/dev/null 2>/dev/null; then
+			echo "${i:?}"
 			return
 		fi
 	done
@@ -50,7 +50,7 @@ set_xterm_title() {
 # run said command. This is used for long running operations during
 # shell startup so the user knows what is causing a possible delay.
 print_and_run() {
-	echo "$PS1$*"
+	echo "${PS1:?}$*"
 	"$@"
 }
 
@@ -58,7 +58,7 @@ print_and_run() {
 # ALIASES
 # ------------------------------------------------------------------------------
 
-case "$termprog" in
+case "${termprog}" in
 	9term|win)
 		alias diff='diff -u'
 		alias ls='ls -F'
@@ -77,7 +77,7 @@ esac
 alias df='df -h'
 alias du='du -h'
 
-alias open="$HOME/bin/open"
+alias open="${HOME:?}/bin/open"
 
 # Send a notification about the previous command.
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo utilities-terminal || echo dialog-error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -93,7 +93,7 @@ alias gitd='cd $(git rev-parse --show-toplevel)'
 export BROWSER=$(get_exist google-chrome chromium-browser firefox lynx)
 
 # Find EDITOR and PAGER.
-case "$termprog" in
+case "${termprog}" in
 	9term|win)
 		export EDITOR=E
 		export PAGER=cat
@@ -112,18 +112,18 @@ PS1='$ '
 PS2='> '
 PS4='+ '
 
-case "$TERM" in
+case "${TERM:?}" in
 	xterm*|rxvt*|screen*)
 		# Show current directory in xterm title.
-		last_line_of_prompt_command=$(echo "$PROMPT_COMMAND" | tail -n1)
-		if [[ "$last_line_of_prompt_command" =~ ^[:space:]*$ ]] || [[ "$last_line_of_prompt_command" =~ \;[:space:]*$ ]]; then
-			PROMPT_COMMAND+='set_xterm_title "$PWD";'
+		last_line_of_prompt_command=$(echo "${PROMPT_COMMAND}" | tail -n1)
+		if [[ "${last_line_of_prompt_command?}" =~ ^[:space:]*$ ]] || [[ "${last_line_of_prompt_command?}" =~ \;[:space:]*$ ]]; then
+			PROMPT_COMMAND+='set_xterm_title "${PWD:?}";'
 		else
-			PROMPT_COMMAND+=';set_xterm_title "$PWD";'
+			PROMPT_COMMAND+=';set_xterm_title "${PWD:?}";'
 		fi
 
 		# Show command in xterm title.
-		trap 'set_xterm_title "$PWD - $BASH_COMMAND"' DEBUG
+		trap 'set_xterm_title "${PWD:?} - ${BASH_COMMAND:?}"' DEBUG
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
@@ -136,7 +136,7 @@ esac
 # MOTD
 # ------------------------------------------------------------------------------
 
-if [ -z "$BASHRC_MOTD_ALREADY_SHOWN" ] && get_exist fortune >/dev/null; then
+if [ -z "${BASHRC_MOTD_ALREADY_SHOWN}" ] && get_exist fortune >/dev/null; then
 	if get_exist cowsay >/dev/null; then
 		fortune -s | cowsay -f tux
 	else
