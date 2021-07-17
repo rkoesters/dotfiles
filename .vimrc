@@ -8,7 +8,7 @@ set encoding=utf8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Basic Options
 
-set formatoptions=qrn
+set formatoptions=cjnqr
 set noexpandtab
 set nowrap
 set number
