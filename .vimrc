@@ -25,6 +25,8 @@ set nofoldenable
 auto BufEnter * let &titlestring=getcwd() . " - vim - " . expand("%")
 
 if exists("$tabstop")
+	let &shiftwidth=$tabstop
+	let &softtabstop=$tabstop
 	let &tabstop=$tabstop
 endif
 
