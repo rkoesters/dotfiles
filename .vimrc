@@ -9,8 +9,6 @@ set encoding=utf8
 """ Basic Options
 
 set formatoptions=cjnqr
-set softtabstop=0
-set noexpandtab
 set nowrap
 set number
 set ruler
@@ -25,9 +23,11 @@ set nofoldenable
 
 auto BufEnter * let &titlestring=getcwd() . " - vim - " . expand("%")
 
+set expandtab
+set tabstop=8
 if exists("$tabstop")
 	let &shiftwidth=$tabstop
-	let &tabstop=$tabstop
+	let &softtabstop=$tabstop
 endif
 
 if exists("$textwidth")
