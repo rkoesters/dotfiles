@@ -9,6 +9,7 @@ set encoding=utf8
 """ Basic Options
 
 set formatoptions=cjnqr
+set softtabstop=0
 set noexpandtab
 set nowrap
 set number
@@ -26,7 +27,6 @@ auto BufEnter * let &titlestring=getcwd() . " - vim - " . expand("%")
 
 if exists("$tabstop")
 	let &shiftwidth=$tabstop
-	let &softtabstop=$tabstop
 	let &tabstop=$tabstop
 endif
 
