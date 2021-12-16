@@ -46,11 +46,11 @@ set_xterm_title() {
 	printf '\033]0;%s\007' "$@"
 }
 
-# Print the given command so it looks like the user typed it and then
-# run said command. This is used for long running operations during
-# shell startup so the user knows what is causing a possible delay.
+# Print the given command in a way that mimics `set -x` and then run said
+# command. This is used for long running operations during shell startup so the
+# user knows what is causing a possible delay.
 print_and_run() {
-	echo "${PS1:?}$*"
+	echo "${PS4:?}$*"
 	"$@"
 }
 
