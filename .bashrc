@@ -137,10 +137,11 @@ esac
 # ------------------------------------------------------------------------------
 
 if [ -z "${BASHRC_MOTD_ALREADY_SHOWN}" ] && get_exist fortune >/dev/null; then
+	fortune -n 500 -s |
 	if get_exist cowsay >/dev/null; then
-		fortune -s | cowsay -f tux
+		cowsay -f tux
 	else
-		fortune -s
+		cat
 	fi
 	BASHRC_MOTD_ALREADY_SHOWN=1
 	export BASHRC_MOTD_ALREADY_SHOWN
