@@ -33,7 +33,7 @@ shopt -s checkwinsize
 # Return the first argument that exists as executable.
 get_exist() {
 	for i in "$@"; do
-		if which "${i:?}" >/dev/null 2>/dev/null; then
+		if type "${i:?}" >/dev/null 2>/dev/null; then
 			echo "${i:?}"
 			return
 		fi
