@@ -146,3 +146,5 @@ if [ -z "${BASHRC_MOTD_ALREADY_SHOWN}" ] && get_exist fortune >/dev/null; then
 	BASHRC_MOTD_ALREADY_SHOWN=1
 	export BASHRC_MOTD_ALREADY_SHOWN
 fi
+
+print_and_run context
