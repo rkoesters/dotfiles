@@ -12,3 +12,4 @@ fi
 echo " HOSTNAME: $(uname -n)"
 echo "     USER: $(id -un)"
 echo "      PWD: $(pwd)"
+echo "     PATH: $(echo "${PATH}" | sed 's/:/\n           /g')"
