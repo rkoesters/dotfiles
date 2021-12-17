@@ -1,13 +1,14 @@
 #!/bin/sh
 set -eu
 
-echo "MACHINE:  $(uname -m)"
-echo "KERNEL:   $(uname -s) $(uname -r)"
+echo "TIMESTAMP: $(date '+%Y-%m-%d %T')"
+echo "MACHINE:   $(uname -m)"
+echo "KERNEL:    $(uname -s) $(uname -r)"
 
 if type lsb_release >/dev/null 2>&1; then
-	echo "DISTRO:   $(lsb_release -s -d)"
+	echo "DISTRO:    $(lsb_release -s -d)"
 fi
 
-echo "HOSTNAME: $(uname -n)"
-echo "USER:     $(id -un)"
-echo "PWD:      $(pwd)"
+echo "HOSTNAME:  $(uname -n)"
+echo "USER:      $(id -un)"
+echo "PWD:       $(pwd)"
