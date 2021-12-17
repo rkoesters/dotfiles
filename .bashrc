@@ -136,15 +136,22 @@ esac
 # MOTD
 # ------------------------------------------------------------------------------
 
-if [ -z "${BASHRC_MOTD_ALREADY_SHOWN}" ] && get_exist fortune >/dev/null; then
+# Keep everything that should run every time an interactive shell session begins
+# above this section.
+
+if [ -n "${BASHRC_MOTD_ALREADY_SHOWN}" ]; then
+	return
+fi
+BASHRC_MOTD_ALREADY_SHOWN=1
+export BASHRC_MOTD_ALREADY_SHOWN
+
+if get_exist fortune >/dev/null; then
 	fortune -n 500 -s |
 	if get_exist cowsay >/dev/null; then
 		cowsay -f tux
 	else
 		cat
 	fi
-	BASHRC_MOTD_ALREADY_SHOWN=1
-	export BASHRC_MOTD_ALREADY_SHOWN
 fi
 
 print_and_run context
