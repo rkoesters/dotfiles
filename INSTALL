@@ -90,6 +90,9 @@ env |
 grep -e '^EMAIL=' -e '^FULLNAME=' |
 sed -e 's/=/=\"/g' -e 's/$/\"/g' >./INSTALL.cache
 
+# Set ${OPEN_SCRIPT} to direct path to bin/open.
+OPEN_SCRIPT="${HOME:?}/bin/open"
+export OPEN_SCRIPT
 
 # Process '*.in' files.
 for i in $(find . -name '*.in'); do

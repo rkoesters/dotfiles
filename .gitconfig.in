@@ -10,4 +10,4 @@
 
 [web]
 	# Use our included "open" script.
-	browser = open
+	browser = ${OPEN_SCRIPT}
