@@ -87,7 +87,7 @@ fi
 
 # Build cache.
 env |
-grep -e EMAIL -e FULLNAME |
+grep -e '^EMAIL=' -e '^FULLNAME=' |
 sed -e 's/=/=\"/g' -e 's/$/\"/g' >./INSTALL.cache
 
 
