@@ -65,7 +65,7 @@ case "${termprog}" in
 		;;
 	*)
 		alias diff='diff -u --color=auto'
-		alias ls='ls -p --color=auto'
+		alias ls='ls -h -p --color=auto'
 
 		alias grep='grep --color=auto'
 		alias egrep='egrep --color=auto'
