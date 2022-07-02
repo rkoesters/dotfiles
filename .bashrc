@@ -21,7 +21,7 @@ unset SSH_ASKPASS
 
 # I always use ^D to exit the shell, so it better work.
 set +o ignoreeof
-# I want my shell to trust my judgement, no matter how dangerous that is.
+# I use > to overwrite files all the time.
 set +o noclobber
 # Update LINES and COLUMNS after every command.
 shopt -s checkwinsize
