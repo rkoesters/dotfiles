@@ -43,7 +43,7 @@ get_exist() {
 
 # Override the xterm window title.
 set_xterm_title() {
-	printf '\033]0;%s\007' "$@"
+	printf '\033]0;%s\007' "$*"
 }
 
 # Print the given command in a way that mimics `set -x` and then run said
