@@ -1,2 +1,0 @@
-#!/bin/sh
-exec fusermount -u "${HOME:?}/mnt/Google Drive"
