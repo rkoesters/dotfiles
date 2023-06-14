@@ -113,7 +113,7 @@ PS2='> '
 PS4='+ '
 
 case "${TERM:?}" in
-	xterm*|rxvt*|screen*)
+	xterm*|rxvt*|screen*|tmux*)
 		# Show current directory in xterm title.
 		last_line_of_prompt_command=$(echo "${PROMPT_COMMAND}" | tail -n1)
 		if [[ "${last_line_of_prompt_command?}" =~ ^[:space:]*$ ]] || [[ "${last_line_of_prompt_command?}" =~ \;[:space:]*$ ]]; then
