@@ -54,6 +54,11 @@ print_and_run() {
 	"$@"
 }
 
+# Like pwd except replace home directory path with `~`.
+pretty_pwd() {
+	dirs +0
+}
+
 # ------------------------------------------------------------------------------
 # ALIASES
 # ------------------------------------------------------------------------------
@@ -117,13 +122,13 @@ case "${TERM:?}" in
 		# Show current directory in xterm title.
 		last_line_of_prompt_command=$(echo "${PROMPT_COMMAND}" | tail -n1)
 		if [[ "${last_line_of_prompt_command?}" =~ ^[:space:]*$ ]] || [[ "${last_line_of_prompt_command?}" =~ \;[:space:]*$ ]]; then
-			PROMPT_COMMAND+='set_xterm_title "${PWD:?}";'
+			PROMPT_COMMAND+='set_xterm_title "$(pretty_pwd)";'
 		else
-			PROMPT_COMMAND+=';set_xterm_title "${PWD:?}";'
+			PROMPT_COMMAND+=';set_xterm_title "$(pretty_pwd)";'
 		fi
 
 		# Show command in xterm title.
-		trap 'set_xterm_title "${PWD:?} - ${BASH_COMMAND:?}"' DEBUG
+		trap 'set_xterm_title "$(pretty_pwd) - ${BASH_COMMAND:?}"' DEBUG
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
