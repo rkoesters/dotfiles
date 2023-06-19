@@ -21,7 +21,7 @@ set nofoldenable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Options that need a bit more logic
 
-auto BufEnter * let &titlestring="vim " . substitute(expand("%:p"), $HOME, '~', '')
+auto BufEnter * let &titlestring="vim " . expand("%") . " - " . substitute(getcwd(), $HOME, '~', '')
 
 set expandtab
 set tabstop=8
