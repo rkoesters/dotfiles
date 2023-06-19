@@ -8,6 +8,9 @@
 [push]
 	default = simple
 
+[init]
+	defaultBranch = main
+
 [web]
 	# Use our included "open" script.
 	browser = ${OPEN_SCRIPT}
