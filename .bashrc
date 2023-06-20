@@ -128,7 +128,7 @@ case "${TERM:?}" in
 		fi
 
 		# Show command in xterm title.
-		trap 'set_xterm_title "$(pretty_pwd) - ${BASH_COMMAND:?}"' DEBUG
+		trap 'set_xterm_title "${BASH_COMMAND:?} - $(pretty_pwd)"' DEBUG
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
