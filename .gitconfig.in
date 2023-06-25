@@ -5,11 +5,14 @@
 [help]
 	format = man
 
+[init]
+	defaultBranch = main
+
 [push]
 	default = simple
 
-[init]
-	defaultBranch = main
+[pull]
+	rebase = true
 
 [web]
 	# Use our included "open" script.
