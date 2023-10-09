@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eu -o pipefail
+
+go doc -all "$@" | less --quit-if-one-screen
