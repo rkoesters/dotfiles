@@ -6,6 +6,7 @@ exclude='
 *.in
 .editorconfig
 .git/*
+.github/*
 .gitignore
 INSTALL*
 README.md
