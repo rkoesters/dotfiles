@@ -117,18 +117,31 @@ PS1='$ '
 PS2='> '
 PS4='+ '
 
+__prompt_command_xterm () {
+	__exit_code=$?
+	__exit_color=31
+	if [ "${__exit_code:?}" = "0" ]; then
+		__exit_color=32
+	fi
+	printf -v PS1 '(\033[0;%sm%s\033[0m)$ ' "${__exit_color:?}" "${__exit_code:?}"
+
+	set_xterm_title "$(pretty_pwd)"
+}
+
+__debug_trap_xterm () {
+	set_xterm_title "${BASH_COMMAND:?} - $(pretty_pwd)"
+}
+
 case "${TERM:?}" in
 	xterm*|rxvt*|screen*|tmux*)
-		# Show current directory in xterm title.
-		last_line_of_prompt_command=$(echo "${PROMPT_COMMAND}" | tail -n1)
-		if [[ "${last_line_of_prompt_command?}" =~ ^[:space:]*$ ]] || [[ "${last_line_of_prompt_command?}" =~ \;[:space:]*$ ]]; then
-			PROMPT_COMMAND+='set_xterm_title "$(pretty_pwd)";'
-		else
-			PROMPT_COMMAND+=';set_xterm_title "$(pretty_pwd)";'
-		fi
-
-		# Show command in xterm title.
-		trap 'set_xterm_title "${BASH_COMMAND:?} - $(pretty_pwd)"' DEBUG
+		case "${PROMPT_COMMAND}" in
+			__prompt_command_xterm*)
+				;;
+			*)
+				PROMPT_COMMAND="__prompt_command_xterm; ${PROMPT_COMMAND}"
+				;;
+		esac
+		trap '__debug_trap_xterm' DEBUG
 		;;
 	9term|dumb)
 		PROMPT_COMMAND='awd'
