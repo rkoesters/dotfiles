@@ -118,12 +118,12 @@ PS2='> '
 PS4='+ '
 
 __prompt_command_xterm () {
-	__exit_code=$?
-	__exit_color=31
-	if [ "${__exit_code:?}" = "0" ]; then
-		__exit_color=32
+	local exit_code=$?
+	local exit_color=31
+	if [ "${exit_code:?}" = "0" ]; then
+		exit_color=32
 	fi
-	printf -v PS1 '(\033[0;%sm%s\033[0m)$ ' "${__exit_color:?}" "${__exit_code:?}"
+	printf -v PS1 '(\033[0;%sm%3s\033[0m)$ ' "${exit_color:?}" "${exit_code:?}"
 
 	set_xterm_title "$(pretty_pwd)"
 }
