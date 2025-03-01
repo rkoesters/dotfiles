@@ -41,11 +41,6 @@ get_exist() {
 	return 1
 }
 
-# Override the xterm window title.
-set_xterm_title() {
-	printf '\033]0;%s\007' "$*"
-}
-
 # Print the given command in a way that mimics `set -x` and then run said
 # command. This is used for long running operations during shell startup so the
 # user knows what is causing a possible delay.
@@ -113,23 +108,22 @@ esac
 # PROMPT
 # ------------------------------------------------------------------------------
 
-PS1='$ '
+PS1='[${__ps1_exit_code:-000}] \u@\h:\w\033]0;\w\007\n$ '
 PS2='> '
 PS4='+ '
 
 __prompt_command_xterm () {
-	local exit_code=$?
-	local exit_color=31
-	if [ "${exit_code:?}" = "0" ]; then
-		exit_color=32
+	local code=$?
+	local color=31
+	if [ "${code:?}" = "0" ]; then
+		color=32
 	fi
-	printf -v PS1 '(\033[0;%sm%3s\033[0m)$ ' "${exit_color:?}" "${exit_code:?}"
-
-	set_xterm_title "$(pretty_pwd)"
+	printf -v __ps1_exit_code '\033[0;%sm%3s\033[0m' "${color:?}" "${code:?}"
 }
 
 __debug_trap_xterm () {
-	set_xterm_title "${BASH_COMMAND:?} - $(pretty_pwd)"
+	# Add the running command to the xterm title.
+	printf '\033]0;%s\007' "${BASH_COMMAND:?} - $(pretty_pwd)"
 }
 
 case "${TERM:?}" in
