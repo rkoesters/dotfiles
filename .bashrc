@@ -146,7 +146,7 @@ __prompt_command () {
 
 __debug_trap_xterm () {
 	# Add the running command to the xterm title.
-	printf '\033]0;%s\007' "${BASH_COMMAND:?} - $(pretty_pwd)"
+	printf '\033]0;%s - %s\007' "${BASH_COMMAND:?}" "$(pretty_pwd)"
 }
 
 __debug_trap () {
