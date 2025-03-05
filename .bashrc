@@ -138,9 +138,15 @@ __prompt_command_9term () {
 
 __prompt_command () {
 	case "${TERM:?}" in
-		xterm*|rxvt*|screen*|tmux*) __prompt_command_xterm ;;
-		9term|dumb) __prompt_command_9term ;;
-		*) __prompt_command_plain ;;
+		xterm*|rxvt*|screen*|tmux*)
+			__prompt_command_xterm
+			;;
+		9term|dumb)
+			__prompt_command_9term
+			;;
+		*)
+			__prompt_command_plain
+			;;
 	esac
 }
 
@@ -151,8 +157,11 @@ __debug_trap_xterm () {
 
 __debug_trap () {
 	case "${TERM:?}" in
-		xterm*|rxvt*|screen*|tmux*) __debug_trap_xterm ;;
-		*) ;;
+		xterm*|rxvt*|screen*|tmux*)
+			__debug_trap_xterm
+			;;
+		*)
+			;;
 	esac
 }
 
