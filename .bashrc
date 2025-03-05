@@ -115,11 +115,16 @@ PS1="${__ps1_plain:?}"
 PS2='> '
 PS4='+ '
 
-__prompt_command_xterm () {
+__prompt_command_plain () {
 	local code=$?
 	printf -v __ps1_status_code '%3s' "${code:?}"
+	PS1="${__ps1_plain:?}"
+}
+
+__prompt_command_xterm () {
+	__prompt_command_plain
 	__ps1_status_color=31
-	if [ "${code:?}" = "0" ]; then
+	if [ "${__ps1_status_code:?}" = "  0" ]; then
 		__ps1_status_color=32
 	fi
 	__ps1_pretty_pwd="$(pretty_pwd)"
@@ -127,15 +132,15 @@ __prompt_command_xterm () {
 }
 
 __prompt_command_9term () {
+	__prompt_command_plain
 	type awd >/dev/null 2>&1 && awd
-	PS1="${__ps1_plain:?}"
 }
 
 __prompt_command () {
 	case "${TERM:?}" in
 		xterm*|rxvt*|screen*|tmux*) __prompt_command_xterm ;;
 		9term|dumb) __prompt_command_9term ;;
-		*) ;;
+		*) __prompt_command_plain ;;
 	esac
 }
 
