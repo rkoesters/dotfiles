@@ -133,6 +133,8 @@ __prompt_command_xterm () {
 
 __prompt_command_9term () {
 	__prompt_command_plain
+	# Only run awd to update the window title if awd exists -- it might not
+	# under TERM=dumb.
 	type awd >/dev/null 2>&1 && awd
 }
 
