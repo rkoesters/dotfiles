@@ -146,10 +146,13 @@ __debug_trap () {
 	esac
 }
 
-if [ -n "${bash_preexec_imported}" ]; then
-	preexec_functions+=(__debug_trap)
-	precmd_functions+=(__prompt_command)
-else
+preexec_functions+=(__debug_trap)
+precmd_functions+=(__prompt_command)
+
+# If bash-preexec is not imported, then manually hook into PROMPT_COMMAND and
+# the DEBUG trap. Otherwise, the above preexec_functions and precmd_functions
+# are sufficient.
+if [ -z "${bash_preexec_imported}" ]; then
 	trap '__debug_trap' DEBUG
 	PROMPT_COMMAND="__prompt_command; ${PROMPT_COMMAND}"
 fi
