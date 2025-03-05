@@ -108,7 +108,10 @@ esac
 # PROMPT
 # ------------------------------------------------------------------------------
 
-PS1='[\[\033[0;${__ps1_status_color:-33}m\]${__ps1_status_code:-000}\[\033[0m\]] \u@\H:\w\[\033]0;${__ps1_pretty_pwd:-???}\007\]\n\$ '
+__ps1_plain='[${__ps1_status_code:-000}] \u@\H:\w\n\$ '
+__ps1_xterm='[\[\033[0;${__ps1_status_color:-33}m\]${__ps1_status_code:-000}\[\033[0m\]] \u@\H:\w\[\033]0;${__ps1_pretty_pwd:-???}\007\]\n\$ '
+
+PS1="${__ps1_plain:?}"
 PS2='> '
 PS4='+ '
 
@@ -120,10 +123,12 @@ __prompt_command_xterm () {
 		__ps1_status_color=32
 	fi
 	__ps1_pretty_pwd="$(pretty_pwd)"
+	PS1="${__ps1_xterm:?}"
 }
 
 __prompt_command_9term () {
 	type awd >/dev/null 2>&1 && awd
+	PS1="${__ps1_plain:?}"
 }
 
 __prompt_command () {
