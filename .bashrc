@@ -121,28 +121,37 @@ __prompt_command_xterm () {
 	printf -v __ps1_exit_code '\033[0;%sm%3s\033[0m' "${color:?}" "${code:?}"
 }
 
+__prompt_command_9term () {
+	awd
+}
+
+__prompt_command () {
+	case "${TERM:?}" in
+		xterm*|rxvt*|screen*|tmux*) __prompt_command_xterm ;;
+		9term|dumb) __prompt_command_9term ;;
+		*) ;;
+	esac
+}
+
 __debug_trap_xterm () {
 	# Add the running command to the xterm title.
 	printf '\033]0;%s\007' "${BASH_COMMAND:?} - $(pretty_pwd)"
 }
 
-case "${TERM:?}" in
-	xterm*|rxvt*|screen*|tmux*)
-		case "${PROMPT_COMMAND}" in
-			__prompt_command_xterm*)
-				;;
-			*)
-				PROMPT_COMMAND="__prompt_command_xterm; ${PROMPT_COMMAND}"
-				;;
-		esac
-		trap '__debug_trap_xterm' DEBUG
-		;;
-	9term|dumb)
-		PROMPT_COMMAND='awd'
-		;;
-	*)
-		;;
-esac
+__debug_trap () {
+	case "${TERM:?}" in
+		xterm*|rxvt*|screen*|tmux*) __debug_trap_xterm ;;
+		*) ;;
+	esac
+}
+
+if [ -n "${bash_preexec_imported:-}" ]; then
+	preexec_functions+=(__debug_trap)
+	precmd_functions+=(__prompt_command)
+else
+	trap '__debug_trap' DEBUG
+	PROMPT_COMMAND="__prompt_command; ${PROMPT_COMMAND}"
+fi
 
 # ------------------------------------------------------------------------------
 # MOTD
