@@ -33,7 +33,7 @@ shopt -s checkwinsize
 # Return the first argument that exists as executable.
 get_exist() {
 	for i in "$@"; do
-		if type "${i:?}" >/dev/null 2>/dev/null; then
+		if type "${i:?}" >/dev/null 2>&1; then
 			echo "${i:?}"
 			return
 		fi
@@ -123,7 +123,7 @@ __prompt_command_xterm () {
 }
 
 __prompt_command_9term () {
-	awd
+	type awd >/dev/null 2>&1 && awd
 }
 
 __prompt_command () {
