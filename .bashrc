@@ -108,7 +108,7 @@ esac
 # PROMPT
 # ------------------------------------------------------------------------------
 
-PS1='[${__ps1_exit_code:-000}] \u@\H:\w\033]0;\w\007\n\$ '
+PS1='[${__ps1_exit_code:-000}] \u@\H:\w\033]0;${__ps1_pretty_pwd:-???}\007\n\$ '
 PS2='> '
 PS4='+ '
 
@@ -119,6 +119,7 @@ __prompt_command_xterm () {
 		color=32
 	fi
 	printf -v __ps1_exit_code '\033[0;%sm%3s\033[0m' "${color:?}" "${code:?}"
+	__ps1_pretty_pwd="$(pretty_pwd)"
 }
 
 __prompt_command_9term () {
@@ -145,7 +146,7 @@ __debug_trap () {
 	esac
 }
 
-if [ -n "${bash_preexec_imported:-}" ]; then
+if [ -n "${bash_preexec_imported}" ]; then
 	preexec_functions+=(__debug_trap)
 	precmd_functions+=(__prompt_command)
 else
