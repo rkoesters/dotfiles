@@ -157,12 +157,21 @@ __debug_trap_xterm () {
 	printf '\033]0;%s - %s\007' "${BASH_COMMAND:?}" "$(pretty_pwd)"
 }
 
+__debug_trap_9term () {
+	case "${termprog}" in
+		9term|win)
+			label "${BASH_COMMAND:?} - $(pretty_pwd)"
+			;;
+	esac
+}
+
 __debug_trap () {
 	case "${TERM:?}" in
 		xterm*|rxvt*|screen*|tmux*)
 			__debug_trap_xterm
 			;;
-		*)
+		9term|dumb)
+			__debug_trap_9term
 			;;
 	esac
 }
