@@ -1,0 +1,7 @@
+[user]
+name = "${FULLNAME}"
+email = "${EMAIL}"
+
+[ui]
+pager = ["less", "-RFX"]
+default-command = ["log"]
