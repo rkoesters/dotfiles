@@ -84,6 +84,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo utilities-termin
 
 # Change directory to the root of a git repo.
 alias gitd='cd $(git rev-parse --show-toplevel)'
+alias jjd='cd $(jj workspace root)'
 
 # ------------------------------------------------------------------------------
 # DEFAULT PROGRAMS
