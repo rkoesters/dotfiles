@@ -6,3 +6,6 @@ email = "${EMAIL}"
 pager = ["less", "-RFX"]
 default-command = ["log"]
 diff-formatter = ":git"
+
+[ui.movement]
+edit = true
