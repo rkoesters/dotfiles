@@ -5,3 +5,4 @@ email = "${EMAIL}"
 [ui]
 pager = ["less", "-RFX"]
 default-command = ["log"]
+diff-formatter = ":git"
