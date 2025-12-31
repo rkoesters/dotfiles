@@ -26,3 +26,6 @@ jobs:
           sudo apt-get install -y -q shellcheck
 
       - run: shellcheck bin/*
+      - run: shellcheck --shell=sh .profile
+      - run: shellcheck --shell=bash .bashrc .bash_profile
+      - run: shellcheck INSTALL
