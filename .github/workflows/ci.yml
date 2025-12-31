@@ -2,13 +2,15 @@
 
 name: CI
 
-"on":
+'on':
   pull_request:
+    branches:
+      - main
   push:
-    branches-ignore:
-      - 'dependabot/**'
+    branches:
+      - main
   schedule:
-    - cron: '29 4 1 * *'
+    - cron: 29 4 1 * *
 
 jobs:
   shellcheck:
