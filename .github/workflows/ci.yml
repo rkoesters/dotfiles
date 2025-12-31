@@ -10,7 +10,7 @@ name: CI
     branches:
       - main
   schedule:
-    - cron: 29 4 1 * *
+    - cron: 29 4 * * 6
 
 jobs:
   shellcheck:
