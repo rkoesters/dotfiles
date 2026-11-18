@@ -110,7 +110,7 @@ fi
 
 # Install the files.
 echo "${exclude:?}" |
-rsync -a ${rsync_args?} --exclude-from /dev/stdin . "${HOME:?}"
+rsync -a ${rsync_args?} --exclude-from - . "${HOME:?}"
 
 # Put .bashrc back to where it was.
 if [ "${bash_local}" = "1" ]; then
